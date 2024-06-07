@@ -1,0 +1,36 @@
+import os
+import json
+import pandas as pd
+
+# Define paths
+input_data_path = r"C:\Users\jucke\Downloads\archive (1)\databricks-dolly-15k.jsonl"
+log_path = r"C:\Users\jucke\Desktop\ML2\ML_TEST\Log"
+output_data_path = r"C:\Users\jucke\Desktop\ML2\ML_TEST\datapipeline\input\data"
+
+# Ensure directories exist
+os.makedirs(log_path, exist_ok=True)
+os.makedirs(output_data_path, exist_ok=True)
+
+# Load the dataset
+data = []
+with open(input_data_path, 'r', encoding='utf-8') as file:
+    for line in file:
+        data.append(json.loads(line))
+
+# Convert to DataFrame
+df = pd.DataFrame(data)
+
+# Inspect the data
+inspection_report = df.describe(include='all')
+inspection_report_path = os.path.join(log_path, 'data_inspection_report.csv')
+inspection_report.to_csv(inspection_report_path)
+print(f"Data inspection report saved to: {inspection_report_path}")
+
+# Save the raw data for later processing
+raw_data_path = os.path.join(output_data_path, 'databricks-dolly-15k.jsonl')
+df.to_json(raw_data_path, orient='records', lines=True)
+print(f"Raw data saved to: {raw_data_path}")
+
+# Example entry
+example_entry = df.iloc[0]
+print(f"Example Entry:\n{example_entry}")

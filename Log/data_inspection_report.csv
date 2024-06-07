@@ -1,0 +1,5 @@
+,instruction,context,response,category
+count,15015,15015,15015,15015
+unique,14781,4262,14944,8
+top,Extract all of the names of people mentioned in this paragraph and list them using bullets in the format {Name},,yes,open_qa
+freq,15,10417,16,3611
