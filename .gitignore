@@ -1,5 +1,8 @@
 venv/
-model/
+models/
+.venv/
+/datapipeline/
+datapipeline/
 __pycache__/
 *.pyc
 *.pyo
